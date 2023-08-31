@@ -12,6 +12,6 @@ public class SampleController {
     @GetMapping("/hello")
     public void hello(Model model){
         log.info("Hello..................");
-        model.addAttribute("msg","Hello!");
+        model.addAttribute("msg","Hello World!");
     }
 }
