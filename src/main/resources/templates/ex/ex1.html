@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <ul>
+      <li th:each="str: ${list}" th:text="${str}"></li>
+  </ul>
+  <ul>
+      <th:block th:each="str:${list}">
+          <li>[[${str}]]</li>
+      </th:block>
+  </ul>
+  <ul>
+      <li th:each="str,status: ${list}">
+          <span th:text="${status.odd} ?'ODD ---'+${str} : 'EVEN ---'+${str}"></span>
+      </li>
+  </ul>
+  <a th:href="@{/hello(name='AAA' , age= 16)}">Go to /hello</a>
+</body>
+</html>
