@@ -57,4 +57,37 @@ public class BoardController {
 
         return "redirect:/board/list";
     }
+
+    @GetMapping({"/read","/modify"})
+    public void read(Long bno,Model model,PageRequestDTO pageRequestDTO){
+
+        BoardDTO boardDTO = boardService.read(bno);
+
+        log.info(boardDTO);
+
+        model.addAttribute("dto",boardDTO);
+    }
+
+    @PostMapping("/modify")
+    public String modify(@Valid BoardDTO boardDTO,
+                         PageRequestDTO pageRequestDTO,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes){
+
+        log.info("modify POST....");
+        if(bindingResult.hasErrors()){
+            log.info("has Errors....");
+
+            String link = pageRequestDTO.getLink();
+
+            redirectAttributes.addFlashAttribute("errors",bindingResult.getAllErrors());
+            redirectAttributes.addAttribute("number",boardDTO.getBno());
+            return "redirect:/board/modify?"+link;
+        }
+        boardService.modify(boardDTO);
+        redirectAttributes.addFlashAttribute("result","modified");
+        redirectAttributes.addAttribute("bno",boardDTO.getBno());
+        return "redirect:/board/read";
+    }
+
 }
