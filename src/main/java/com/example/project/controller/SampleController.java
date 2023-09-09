@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@RestController
+@Controller
 @Log4j2
 public class SampleController {
 
