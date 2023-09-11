@@ -8,6 +8,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.net.URI;
 
 @RestController
 @Log4j2
@@ -41,27 +46,36 @@ public class BoardController {
     }
 
     @GetMapping("/register")
-    public void registerGet(){
+    public ModelAndView registerGet(){
+        ModelAndView mav = new ModelAndView("/board/register.html");
+
+        return mav;
+
     }
 
     @PostMapping("/register")
-    public String registerPost(@Valid BoardDTO boardDTO, BindingResult bindingResult
-    , RedirectAttributes redirectAttributes){
+    public ResponseEntity<?> registerPost(@Valid BoardDTO boardDTO,
+                               BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes){
 
         log.info("board POST register....");
 
         if(bindingResult.hasErrors()){
             log.info("has error.....");
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create("/board/register"));
             redirectAttributes.addFlashAttribute("errors",bindingResult.getAllErrors());
 
-            return "redirect:/board/register";
+            return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
         }
 
         log.info(boardDTO);
         Long bno = boardService.register(boardDTO);
         redirectAttributes.addFlashAttribute("result",bno);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("/board/list"));
 
-        return "redirect:/board/list";
+        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
     }
 
     @GetMapping("/read")
@@ -93,40 +107,45 @@ public class BoardController {
     }
 
     @PostMapping("/modify")
-    public ModelAndView modifyPost(@Valid BoardDTO boardDTO,
+    public ResponseEntity<?> modifyPost(@Valid BoardDTO boardDTO,
                          PageRequestDTO pageRequestDTO,
-                         BindingResult bindingResult){
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes){
 
         log.info("modify POST....");
-        ModelAndView mav;
+        String link = pageRequestDTO.getLink();
 
         if(bindingResult.hasErrors()){
             log.info("has Errors....");
 
-            String link = pageRequestDTO.getLink();
-            mav = new ModelAndView("/board/modify.html");
-            mav.addObject("errors",bindingResult.getAllErrors());
-            mav.addObject("bno",boardDTO.getBno());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create("/board/modify?bno="+boardDTO.getBno()+link));
+            redirectAttributes.addFlashAttribute("errors",bindingResult.getAllErrors());
 
-            return mav;
+            return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+
         }
         boardService.modify(boardDTO);
 
-        mav = new ModelAndView("/board/read.html");
-        mav.addObject("result","modified");
-        mav.addObject("dto",boardDTO);
-        log.info(mav);
-        return mav;
+
+        redirectAttributes.addFlashAttribute("result","modifed");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("/board/read?bno="+boardDTO.getBno()+"&"+link));
+
+        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
     }
 
     @PostMapping("/remove")
-    public String remove(Long bno,RedirectAttributes redirectAttributes){
+    public ResponseEntity<?> remove(Long bno,RedirectAttributes redirectAttributes){
 
         log.info("remove post.. "+bno);
+
         boardService.remove(bno);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("/board/list"));
         redirectAttributes.addFlashAttribute("result","removed");
 
-        return "redirect:/board/list";
+        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
     }
 
 }
