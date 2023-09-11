@@ -25,7 +25,7 @@ public class BoardDTO {
     private String content;
 
     @NotEmpty
-    private String writer;
+    private String user;
 
     private LocalDateTime regDate;
 

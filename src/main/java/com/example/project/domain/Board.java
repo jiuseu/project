@@ -22,7 +22,7 @@ public class Board extends BaseEntity {
     private String content;
 
     @Column(length = 50, nullable = false)
-    private String writer;
+    private String user;
 
     public void change(String title, String content) {
         this.title = title;
