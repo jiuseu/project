@@ -50,7 +50,7 @@
                             <th scope="row">[[${dto.bno}]]</th>
                             <td>
                                 <a th:href="|@{/board/read(bno=${dto.bno})}&${link}|">[[${dto.title}]]</a></td>
-                            <td>[[${dto.writer}]]</td>
+                            <td>[[${dto.user}]]</td>
                             <td>[[${#temporals.format(dto.regDate,'yyyy-MM-dd')}]]</td>
                         </tr>
 
@@ -59,7 +59,7 @@
                     <div class="float-end">
                         <ul class="pagination flex-wrap">
                             <li class="page-item" th:if="${responseDTO.prev}">
-                                <a class="page-link" th:date-num="${responseDTO.start-1}">Previous</a>
+                                <a class="page-link" th:data-num="${responseDTO.start-1}">Previous</a>
                             </li>
                             <th:block th:each="i: ${#numbers.sequence(responseDTO.start,responseDTO.end)}">
                                 <li th:class="${responseDTO.page == i}?'page-item active':'page-item'">

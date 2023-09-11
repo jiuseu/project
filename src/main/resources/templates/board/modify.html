@@ -28,7 +28,7 @@
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text">Writer</span>
-              <input type="text" class="form-control" name="writer" th:value="${dto.writer}"readonly>
+              <input type="text" class="form-control" name="user" th:value="${dto.user}"readonly>
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text">RegDate</span>
@@ -71,13 +71,14 @@
   }
 
   const link = [[${pageRequestDTO.getLink()}]]
+  const num = [[${dto.bno}]]
   const formObj = document.querySelector("#f1")
 
   document.querySelector(".modBtn").addEventListener("click", function(e){
     e.preventDefault()
     e.stopPropagation()
 
-    formObj.action = `/board/modify?${link}`
+    formObj.action = `/board/modify?bno=${num}&${link}`
     formObj.method = 'post'
     formObj.submit()
   },false)
