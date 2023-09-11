@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@Controller
+@RestController
 @Log4j2
 @RequestMapping("board")
 @RequiredArgsConstructor
@@ -26,13 +27,17 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/list")
-    public void list(PageRequestDTO pageRequestDTO, Model model){
+    public ModelAndView list(PageRequestDTO pageRequestDTO){
 
         PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
 
         log.info(responseDTO);
 
-        model.addAttribute("responseDTO",responseDTO);
+        ModelAndView mav = new ModelAndView("/board/list.html");
+        mav.addObject("responseDTO",responseDTO);
+        mav.addObject("pageRequestDTO",pageRequestDTO);
+
+        return mav;
     }
 
     @GetMapping("/register")
@@ -59,36 +64,59 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
-    @GetMapping({"/read","/modify"})
-    public void read(Long bno,Model model,PageRequestDTO pageRequestDTO){
+    @GetMapping("/read")
+    public ModelAndView read(Long bno,PageRequestDTO pageRequestDTO){
 
         BoardDTO boardDTO = boardService.read(bno);
 
         log.info(boardDTO);
 
-        model.addAttribute("dto",boardDTO);
+        ModelAndView mav = new ModelAndView("/board/read.html");
+        mav.addObject("dto",boardDTO);
+        mav.addObject("pageRequestDTO",pageRequestDTO);
+
+        return mav;
+    }
+
+    @GetMapping("/modify")
+    public ModelAndView modifyGet(Long bno,PageRequestDTO pageRequestDTO){
+
+        BoardDTO boardDTO = boardService.read(bno);
+
+        log.info(boardDTO);
+
+        ModelAndView mav = new ModelAndView("/board/modify.html");
+        mav.addObject("dto",boardDTO);
+        mav.addObject("pageRequestDTO",pageRequestDTO);
+
+        return mav;
     }
 
     @PostMapping("/modify")
-    public String modify(@Valid BoardDTO boardDTO,
+    public ModelAndView modifyPost(@Valid BoardDTO boardDTO,
                          PageRequestDTO pageRequestDTO,
-                         BindingResult bindingResult,
-                         RedirectAttributes redirectAttributes){
+                         BindingResult bindingResult){
 
         log.info("modify POST....");
+        ModelAndView mav;
+
         if(bindingResult.hasErrors()){
             log.info("has Errors....");
 
             String link = pageRequestDTO.getLink();
+            mav = new ModelAndView("/board/modify.html");
+            mav.addObject("errors",bindingResult.getAllErrors());
+            mav.addObject("bno",boardDTO.getBno());
 
-            redirectAttributes.addFlashAttribute("errors",bindingResult.getAllErrors());
-            redirectAttributes.addAttribute("number",boardDTO.getBno());
-            return "redirect:/board/modify?"+link;
+            return mav;
         }
         boardService.modify(boardDTO);
-        redirectAttributes.addFlashAttribute("result","modified");
-        redirectAttributes.addAttribute("bno",boardDTO.getBno());
-        return "redirect:/board/read";
+
+        mav = new ModelAndView("/board/read.html");
+        mav.addObject("result","modified");
+        mav.addObject("dto",boardDTO);
+        log.info(mav);
+        return mav;
     }
 
     @PostMapping("/remove")
