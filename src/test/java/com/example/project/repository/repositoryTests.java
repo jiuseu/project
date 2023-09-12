@@ -28,7 +28,7 @@ public class repositoryTests {
             Board board = Board.builder()
                     .title("title.."+i)
                     .content("content.."+i)
-                    .writer("user"+(i%10))
+                    .user("user"+(i%10))
                     .build();
 
             Board result = boardRepository.save(board);

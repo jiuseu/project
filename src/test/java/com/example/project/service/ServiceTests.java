@@ -24,7 +24,7 @@ public class ServiceTests {
             BoardDTO boardDTO = BoardDTO.builder()
                     .title("Title.."+i)
                     .content("Content.."+i)
-                    .writer("Person"+i)
+                    .user("Person"+i)
                     .build();
 
             boardService.register(boardDTO);
