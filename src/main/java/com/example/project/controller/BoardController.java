@@ -1,6 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.dto.BoardDTO;
+import com.example.project.dto.BoardListReplyCountDTO;
 import com.example.project.dto.PageRequestDTO;
 import com.example.project.dto.PageResponseDTO;
 import com.example.project.service.BoardService;
@@ -34,7 +35,9 @@ public class BoardController {
     @GetMapping("/list")
     public ModelAndView list(PageRequestDTO pageRequestDTO){
 
-        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
+        //PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
+        PageResponseDTO<BoardListReplyCountDTO> responseDTO =
+                boardService.listWithReplyCount(pageRequestDTO);
 
         log.info(responseDTO);
 
