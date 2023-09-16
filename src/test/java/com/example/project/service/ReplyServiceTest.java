@@ -19,7 +19,7 @@ public class ReplyServiceTest {
         ReplyDTO replyDTO = ReplyDTO.builder()
                 .replyText("댓글 테스트333~")
                 .replyer("댓글이")
-                .bno(103L)
+                .bno(100L)
                 .build();
 
         Long bno = replyService.register(replyDTO);
