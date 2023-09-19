@@ -1,5 +1,6 @@
 package com.example.project.repository;
 
+import com.example.project.domain.Board;
 import com.example.project.dto.BoardListReplyCountDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -35,5 +36,19 @@ public class BoardRepositoryTests {
         //prev next
         log.info(result.hasPrevious()+" "+result.hasNext());
         result.getContent().forEach(board -> log.info(board));
+    }
+
+    @Test
+    public void searchTest() {
+
+        String[] types = {"t", "c", "w"};
+        String keyword = "1";
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+
+        Page<Board> list = boardRepository.searchAll(types, keyword, pageable);
+
+        list.getContent().forEach(i -> {
+            log.info(i);
+        });
     }
 }
