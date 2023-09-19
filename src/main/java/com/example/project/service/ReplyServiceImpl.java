@@ -34,6 +34,12 @@ public class ReplyServiceImpl implements ReplyService{
             map().getBoard().setBno(source.getBno());
         }
     };
+
+    PropertyMap<Reply,ReplyDTO> ReplyReadMapping = new PropertyMap<Reply,ReplyDTO>(){
+        protected void configure(){
+            map().setBno(source.getBoard().getBno());
+        }
+    };
     @Override
     public Long register(ReplyDTO replyDTO){
 
