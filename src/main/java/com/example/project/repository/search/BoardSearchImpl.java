@@ -4,17 +4,17 @@ import com.example.project.domain.Board;
 import com.example.project.domain.QBoard;
 import com.example.project.domain.QReply;
 import com.example.project.dto.BoardListReplyCountDTO;
+import com.example.project.repository.Querydsl5RepositorySupport;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import java.util.List;
 
-public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardSearch {
+public class BoardSearchImpl extends Querydsl5RepositorySupport implements BoardSearch {
 
     public BoardSearchImpl(){
         super(Board.class);
@@ -24,11 +24,9 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
     public Page<Board> searchAll(String[] types, String keyword, Pageable pageable){
 
         QBoard board = QBoard.board;
-        JPQLQuery<Board> query = from(board);
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
 
         if((types != null && types.length > 0) && keyword != null){
-
-            BooleanBuilder booleanBuilder = new BooleanBuilder();
 
             for(String type : types){
                 switch (type){
@@ -43,16 +41,10 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
                         break;
                 }
             }// end for
-            query.where(booleanBuilder);
         } // end if
-        query.where(board.bno.gt(0L));
-
-        //paging
-        this.getQuerydsl().applyPagination(pageable,query);
-        List<Board> list = query.fetch();
-        long count = query.fetchCount();
-
-        return new PageImpl<>(list, pageable, count);
+        return applyPagination(pageable, query -> query.selectFrom(board)
+                        .where(booleanBuilder,board.bno.gt(0L))
+        );
     }
 
     @Override
@@ -60,13 +52,10 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
 
         QBoard board = QBoard.board;
         QReply reply = QReply.reply;
-        JPQLQuery<Board> query = from(board);
-        query.leftJoin(reply).on(reply.board.eq(board));
-
-        query.groupBy(board);
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
 
         if((types != null && types.length > 0) && keyword != null){
-            BooleanBuilder booleanBuilder = new BooleanBuilder();
+
             for(String type : types){
                 switch (type){
                     case "t":
@@ -80,24 +69,18 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
                         break;
                 }
             }
-            query.where(booleanBuilder);
         }
-        query.where(board.bno.gt(0L));
-
-        JPQLQuery<BoardListReplyCountDTO> dtoQuery = query.select(Projections.bean(
-                BoardListReplyCountDTO.class,
-                board.bno,
-                board.title,
-                board.content,
-                board.user,
-                board.regDate,
-                reply.count().as("replyCount")
-        ));
-
-        this.getQuerydsl().applyPagination(pageable,dtoQuery);
-        List<BoardListReplyCountDTO> dtoList = dtoQuery.fetch();
-        long count = dtoQuery.fetchCount();
-
-        return new PageImpl<>(dtoList, pageable, count);
+        return applyPagination(pageable, query -> query.select(Projections.bean(
+                                BoardListReplyCountDTO.class,
+                                board.bno,
+                                board.title,
+                                board.user,
+                                board.regDate,
+                                reply.count().as("replyCount")
+                        )).from(board).leftJoin(reply).on(reply.board.eq(board))
+                        .groupBy(board)
+                        .where(booleanBuilder,
+                                board.bno.gt(0L))
+        );
     }
 }
