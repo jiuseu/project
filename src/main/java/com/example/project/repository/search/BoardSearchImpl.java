@@ -7,9 +7,7 @@ import com.example.project.dto.BoardListReplyCountDTO;
 import com.example.project.repository.Querydsl5RepositorySupport;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
-import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
