@@ -7,9 +7,11 @@ import com.example.project.dto.BoardListReplyCountDTO;
 import com.example.project.repository.Querydsl5RepositorySupport;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class BoardSearchImpl extends Querydsl5RepositorySupport implements BoardSearch {
@@ -17,57 +19,24 @@ public class BoardSearchImpl extends Querydsl5RepositorySupport implements Board
     public BoardSearchImpl(){
         super(Board.class);
     }
+    private QBoard board = QBoard.board;
+    private QReply reply = QReply.reply;
 
     @Override
     public Page<Board> searchAll(String[] types, String keyword, Pageable pageable){
 
-        QBoard board = QBoard.board;
-        BooleanBuilder booleanBuilder = new BooleanBuilder();
-
-        if((types != null && types.length > 0) && keyword != null){
-
-            for(String type : types){
-                switch (type){
-                    case "t":
-                        booleanBuilder.or(board.title.contains(keyword));
-                        break;
-                    case "c":
-                        booleanBuilder.or(board.content.contains(keyword));
-                        break;
-                    case "w":
-                        booleanBuilder.or(board.user.contains(keyword));
-                        break;
-                }
-            }// end for
-        } // end if
         return applyPagination(pageable, query -> query.selectFrom(board)
-                        .where(booleanBuilder,board.bno.gt(0L))
+                        .where(TitleSearch(types,keyword),
+                                ContentSearch(types,keyword),
+                                UserSearch(types,keyword),
+                                board.bno.gt(0L))
         );
     }
 
     @Override
     public Page<BoardListReplyCountDTO> searchWithReplyCount(String[] types,String keyword,Pageable pageable){
 
-        QBoard board = QBoard.board;
-        QReply reply = QReply.reply;
-        BooleanBuilder booleanBuilder = new BooleanBuilder();
 
-        if((types != null && types.length > 0) && keyword != null){
-
-            for(String type : types){
-                switch (type){
-                    case "t":
-                        booleanBuilder.or(board.title.contains(keyword));
-                        break;
-                    case "c":
-                        booleanBuilder.or(board.content.contains(keyword));
-                        break;
-                    case "w":
-                        booleanBuilder.or(board.user.contains(keyword));
-                        break;
-                }
-            }
-        }
         return applyPagination(pageable, query -> query.select(Projections.bean(
                                 BoardListReplyCountDTO.class,
                                 board.bno,
@@ -77,8 +46,22 @@ public class BoardSearchImpl extends Querydsl5RepositorySupport implements Board
                                 reply.count().as("replyCount")
                         )).from(board).leftJoin(reply).on(reply.board.eq(board))
                         .groupBy(board)
-                        .where(booleanBuilder,
+                        .where(TitleSearch(types,keyword),
+                                ContentSearch(types,keyword),
+                                UserSearch(types,keyword),
                                 board.bno.gt(0L))
         );
+    }
+
+    private BooleanExpression TitleSearch(String[] types, String keyword){
+        return Arrays.asList(types).contains("t") == true ? board.title.contains(keyword) : null;
+    }
+
+    private BooleanExpression ContentSearch(String[] types, String keyword){
+        return Arrays.asList(types).contains("c") == true ? board.content.contains(keyword) : null;
+    }
+
+    private BooleanExpression UserSearch(String[] types, String keyword){
+        return Arrays.asList(types).contains("w") == true ? board.user.contains(keyword) : null;
     }
 }
