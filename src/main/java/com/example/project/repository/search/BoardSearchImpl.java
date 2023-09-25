@@ -54,14 +54,29 @@ public class BoardSearchImpl extends Querydsl5RepositorySupport implements Board
     }
 
     private BooleanExpression TitleSearch(String[] types, String keyword){
-        return Arrays.asList(types).contains("t") == true ? board.title.contains(keyword) : null;
+        if(types == null){
+            return null;
+        }
+        else{
+            return Arrays.asList(types).contains("t") == true? board.title.contains(keyword) : null;
+        }
     }
 
     private BooleanExpression ContentSearch(String[] types, String keyword){
-        return Arrays.asList(types).contains("c") == true ? board.content.contains(keyword) : null;
+        if(types == null){
+            return null;
+        }
+        else{
+            return Arrays.asList(types).contains("c")  == true? board.content.contains(keyword) : null;
+        }
     }
 
     private BooleanExpression UserSearch(String[] types, String keyword){
-        return Arrays.asList(types).contains("w") == true ? board.user.contains(keyword) : null;
+        if(types == null){
+            return null;
+        }
+        else{
+            return Arrays.asList(types).contains("w") == true ? board.user.contains(keyword) : null;
+        }
     }
 }
