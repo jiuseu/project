@@ -29,22 +29,12 @@ public class ReplyServiceImpl implements ReplyService{
     private final ReplyRepository replyRepository;
     private final ModelMapper modelMapper;
 
-    PropertyMap<ReplyDTO, Reply> replyMapping = new PropertyMap<ReplyDTO, Reply>() {
-        protected void configure() {
-            map().getBoard().setBno(source.getBno());
-        }
-    };
-
-    PropertyMap<Reply,ReplyDTO> ReplyReadMapping = new PropertyMap<Reply,ReplyDTO>(){
-        protected void configure(){
-            map().setBno(source.getBoard().getBno());
-        }
-    };
     @Override
     public Long register(ReplyDTO replyDTO){
+        modelMapper.typeMap(ReplyDTO.class, Reply.class).addMapping(
+                src -> src.getBno(), (dest, v) -> dest.getBoard().setBno((Long) v)
+        );
 
-
-        modelMapper.addMappings(replyMapping);
         Reply reply = modelMapper.map(replyDTO, Reply.class);
         Long bno = replyRepository.save(reply).getBoard().getBno();
 
@@ -53,6 +43,10 @@ public class ReplyServiceImpl implements ReplyService{
 
     @Override
     public ReplyDTO read(Long rno){
+
+        modelMapper.typeMap(Reply.class, ReplyDTO.class).addMapping(
+                src -> src.getBoard().getBno(), (dest, v) -> dest.setBno((Long)v)
+        );
 
         Optional<Reply> result = replyRepository.findById(rno);
         Reply reply = result.orElseThrow();
