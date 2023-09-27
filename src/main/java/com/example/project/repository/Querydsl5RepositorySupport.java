@@ -123,6 +123,12 @@ public abstract class Querydsl5RepositorySupport {
         return PageableExecutionUtils.getPage(content, pageable, jpaQuery::fetchCount);
     }
 
+    protected <T> JPQLQuery<T> JPQLPagination(Pageable pageable,Function<JPAQueryFactory, JPAQuery> contentQuery) {
+        JPQLQuery jpqQuery = contentQuery.apply(getQueryFactory());
+        getQuerydsl().applyPagination(pageable,jpqQuery);
+        return jpqQuery;
+    }
+
     protected <T> Page<T> applyPagination(Pageable pageable,
                                           Function<JPAQueryFactory, JPAQuery> contentQuery, Function<JPAQueryFactory,
             JPAQuery> countQuery) {
