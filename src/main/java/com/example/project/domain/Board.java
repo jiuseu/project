@@ -2,6 +2,11 @@ package com.example.project.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -9,7 +14,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "imageSet")
 public class Board extends BaseEntity {
 
     @Id
@@ -29,4 +34,28 @@ public class Board extends BaseEntity {
         this.title = title;
         this.content = content;
     }
+
+    @OneToMany(mappedBy = "board",
+    cascade = {CascadeType.ALL},
+    fetch = FetchType.LAZY,
+    orphanRemoval = true)
+    @Builder.Default
+    @BatchSize(size = 20)
+    private Set<BoardImage> imageSet = new HashSet<>();
+
+    public void addImage(String uuid, String fileName){
+        BoardImage boardImage = BoardImage.builder()
+                .uuid(uuid)
+                .fileName(fileName)
+                .board(this)
+                .ord(imageSet.size())
+                .build();
+        imageSet.add(boardImage);
+    }
+
+    public void clearImages(){
+        imageSet.forEach(boardImage -> boardImage.changeBoard(null));
+        this.imageSet.clear();
+    }
+
 }
