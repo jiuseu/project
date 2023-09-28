@@ -132,9 +132,8 @@ public class BoardRepositoryTests {
     @Commit
     public void testRemoveAll() {
 
-        Long bno = 1L;
+        Long bno = 2L;
         replyRepository.deleteByBoard_Bno(bno);
-        boardRepository.deleteById(bno);
     }
 
     @Transactional
