@@ -2,7 +2,6 @@ package com.example.project.service;
 
 import com.example.project.domain.Board;
 import com.example.project.dto.*;
-import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -7,7 +7,6 @@ import com.example.project.dto.BoardImageDTO;
 import com.example.project.dto.BoardListAllDTO;
 import com.example.project.dto.BoardListReplyCountDTO;
 import com.example.project.repository.Querydsl5RepositorySupport;
-import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;

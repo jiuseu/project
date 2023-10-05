@@ -1,6 +1,5 @@
 package com.example.project.service;
 
-import com.example.project.domain.Board;
 import com.example.project.domain.Reply;
 import com.example.project.dto.PageRequestDTO;
 import com.example.project.dto.PageResponseDTO;
@@ -8,9 +7,7 @@ import com.example.project.dto.ReplyDTO;
 import com.example.project.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
