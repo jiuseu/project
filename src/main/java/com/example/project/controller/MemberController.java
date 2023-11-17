@@ -14,7 +14,8 @@ public class MemberController {
 
     @GetMapping("/login")
     public void loginGet(String logout, String error){
-
+       log.info("login get....");
+       log.info("logout:"+ logout);
     }
 
 }
