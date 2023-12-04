@@ -21,6 +21,7 @@ public class CustomSecurityConfig {
         log.info("-----------------------configure-----------------------");
 
         http.formLogin(form -> form.loginPage("/member/login"));
+        http.csrf(form -> form.disable());
 
         return http.build();
     }
