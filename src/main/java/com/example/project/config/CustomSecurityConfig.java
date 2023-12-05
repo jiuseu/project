@@ -10,11 +10,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 
+import javax.sql.DataSource;
+
 @Log4j2
 @Configuration
 @RequiredArgsConstructor
 @EnableMethodSecurity
 public class CustomSecurityConfig {
+
+    private final DataSource dataSource;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
