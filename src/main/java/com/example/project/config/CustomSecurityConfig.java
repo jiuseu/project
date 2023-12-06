@@ -20,12 +20,14 @@ public class CustomSecurityConfig {
 
     private final DataSource dataSource;
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
         log.info("-----------------------configure-----------------------");
 
         http.formLogin(form -> form.loginPage("/member/login"));
         http.csrf(form -> form.disable());
+
 
         return http.build();
     }
