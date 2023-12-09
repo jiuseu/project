@@ -32,5 +32,19 @@ public class Member extends BaseEntity{
     @Builder.Default
     private Set<MemberRole> roleSet = new HashSet<>();
 
+    public void changePassword(String mpw){
+        this.mpw = mpw;
+    }
 
+    public void changeEmail(String email){
+        this.email = email;
+    }
+
+    public void changeDel(boolean del){
+        this.del = del;
+    }
+
+    public void changeSocial(boolean social){
+        this.social = social;
+    }
 }
