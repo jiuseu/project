@@ -47,4 +47,12 @@ public class Member extends BaseEntity{
     public void changeSocial(boolean social){
         this.social = social;
     }
+
+    public void addRole(MemberRole memberRole){
+        this.roleSet.add(memberRole);
+    }
+
+    public void clearRole(){
+        this.roleSet.clear();
+    }
 }
