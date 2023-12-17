@@ -4,12 +4,14 @@ import com.example.project.domain.Member;
 import com.example.project.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -30,7 +32,19 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("isEmpty");
         }
 
+       Member member = result.get();
 
-        return null;
+        MemberSecurityDTO memberSecurityDTO = new MemberSecurityDTO(
+               member.getMid(),
+               member.getMpw(),
+               member.getEmail(),
+                member.isDel(),
+                false,
+                member.getRoleSet().stream().map(memberRole -> new SimpleGrantedAuthority(
+                        "ROLE_"+memberRole.name()
+                )).collect(Collectors.toList())
+        );
+
+        return memberSecurityDTO;
     }
 }
