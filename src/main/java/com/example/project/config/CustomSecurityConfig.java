@@ -44,6 +44,7 @@ public class CustomSecurityConfig {
                 .userDetailsService(userDetailsService)
                 .tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(60 * 60 * 24 * 30));
+        http.exceptionHandling(form -> form.accessDeniedHandler(accessDeniedHandler()));
 
         return http.build();
     }
