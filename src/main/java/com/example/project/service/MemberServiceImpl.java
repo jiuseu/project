@@ -1,5 +1,7 @@
 package com.example.project.service;
 
+import com.example.project.domain.Member;
+import com.example.project.domain.MemberRole;
 import com.example.project.dto.MemberJoinDTO;
 import com.example.project.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +23,17 @@ public class MemberServiceImpl implements MemberService{
 
         log.info("Member Join...");
 
+        String mid = memberJoinDTO.getMid();
+        boolean exist = memberRepository.existsById(mid);
+
+        if(exist){
+            throw new MidExistException();
+        }
+
+        Member member = modelMapper.map(memberJoinDTO, Member.class);
+        member.changePassword(passwordEncoder.encode(memberJoinDTO.getMpw()));
+        member.addRole(MemberRole.USER);
+
+        memberRepository.save(member);
     }
 }
