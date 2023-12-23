@@ -18,4 +18,10 @@ public class MemberController {
        log.info("logout:"+ logout);
     }
 
+    @GetMapping("/join")
+    public void joinGet(){
+
+        log.info("join Get...");
+    }
+
 }
