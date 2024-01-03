@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeelaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecuritu6"
       layout:decorate="~{layout/basic.html}">
 
 <div layout:fragment="content">
@@ -103,6 +104,9 @@
 
 
 <script layout:fragment="script" th:inline="javascript">
+
+  const auth = [[${#authentication.principal}]]
+
   document.querySelector(".pagination").addEventListener("click", function (e){
      e.preventDefault()
      e.stopPropagation()
