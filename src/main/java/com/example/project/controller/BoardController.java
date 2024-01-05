@@ -114,6 +114,7 @@ public class BoardController {
     }
 
     @PostMapping("/modify")
+    @PreAuthorize("principal.username == #boardDTO.user")
     public ResponseEntity<?> modifyPost(@Valid BoardDTO boardDTO,
                          PageRequestDTO pageRequestDTO,
                          BindingResult bindingResult,
