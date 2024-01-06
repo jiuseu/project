@@ -144,6 +144,7 @@ public class BoardController {
     }
 
     @PostMapping("/remove")
+    @PreAuthorize("principal.username == #boardDTO.user")
     public ResponseEntity<?> remove(BoardDTO boardDTO,RedirectAttributes redirectAttributes){
 
         log.info("remove post.. "+boardDTO.getBno());
