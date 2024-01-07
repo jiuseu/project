@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         //해당 아이디가 없다면
         if(result.isEmpty()){
-            throw new UsernameNotFoundException("isEmpty");
+            throw new UsernameNotFoundException("username not found...");
         }
 
        Member member = result.get();
@@ -44,6 +44,9 @@ public class CustomUserDetailsService implements UserDetailsService {
                         "ROLE_"+memberRole.name()
                 )).collect(Collectors.toList())
         );
+
+        log.info("memberSecurityDTO");
+        log.info(memberSecurityDTO);
 
         return memberSecurityDTO;
     }
