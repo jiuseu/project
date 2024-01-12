@@ -34,6 +34,10 @@ public class MemberServiceImpl implements MemberService{
         member.changePassword(passwordEncoder.encode(memberJoinDTO.getMpw()));
         member.addRole(MemberRole.USER);
 
+        log.info("================================");
+        log.info(member);
+        log.info(member.getRoleSet());
+
         memberRepository.save(member);
     }
 }
