@@ -44,6 +44,8 @@ public class MemberController {
             return "redirect:/member/join";
         }
 
+        redirectAttributes.addFlashAttribute("result","success");
+
         return "redirect:/member/login";
     }
 
