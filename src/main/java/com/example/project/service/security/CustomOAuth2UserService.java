@@ -19,6 +19,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         log.info("userRequest.....");
         log.info(userRequest);
 
+        log.info("oauth2 user.....................................");
+
+
         return super.loadUser(userRequest);
     }
 }
