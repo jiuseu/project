@@ -58,6 +58,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return oAuth2User;
     }
 
+    private MemberSecurityDTO generateDTO(String email, Map<String,Object>params){
+
+        return null;
+    }
+
     private String getKakaoEmail(Map<String, Object> paramMap){
 
         log.info("KAKAO-------------------------------------------");
