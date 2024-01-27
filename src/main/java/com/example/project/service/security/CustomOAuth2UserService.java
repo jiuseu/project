@@ -1,5 +1,6 @@
 package com.example.project.service.security;
 
+import com.example.project.domain.Member;
 import com.example.project.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -59,6 +61,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     private MemberSecurityDTO generateDTO(String email, Map<String,Object>params){
+
 
         return null;
     }
