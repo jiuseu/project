@@ -62,7 +62,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private MemberSecurityDTO generateDTO(String email, Map<String,Object>params){
 
-
+        Optional<Member> result = memberRepository.findByEmail(email);
         return null;
     }
 
