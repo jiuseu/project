@@ -57,12 +57,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             log.info(k +":" + v);
         });
 
-        return oAuth2User;
+        return generateDTO(email, paramMap);
     }
 
     private MemberSecurityDTO generateDTO(String email, Map<String,Object>params){
 
         Optional<Member> result = memberRepository.findByEmail(email);
+
         return null;
     }
 
