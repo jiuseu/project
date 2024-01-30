@@ -64,6 +64,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         Optional<Member> result = memberRepository.findByEmail(email);
 
+        if(result.isEmpty()){
+
+        }else{
+
+        }
+
         return null;
     }
 
