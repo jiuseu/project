@@ -1,6 +1,6 @@
 package com.example.project.config;
 
-import com.example.project.service.security.Custom403Handler;
+import com.example.project.service.security.handler.Custom403Handler;
 import com.example.project.service.security.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
