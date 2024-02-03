@@ -21,5 +21,9 @@ public class CustomSocialLoginSuccessHandler implements AuthenticationSuccessHan
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication)throws IOException, ServletException{
 
+        log.info("--------------------------------------------");
+        log.info("CustomLoginSuccessHandler onAuthenticationSuccess..........");
+        log.info(authentication.getPrincipal());
+
     }
 }
