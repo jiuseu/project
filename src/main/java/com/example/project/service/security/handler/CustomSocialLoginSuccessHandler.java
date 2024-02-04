@@ -1,5 +1,6 @@
 package com.example.project.service.security.handler;
 
+import com.example.project.service.security.MemberSecurityDTO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,6 +25,9 @@ public class CustomSocialLoginSuccessHandler implements AuthenticationSuccessHan
         log.info("--------------------------------------------");
         log.info("CustomLoginSuccessHandler onAuthenticationSuccess..........");
         log.info(authentication.getPrincipal());
+
+        MemberSecurityDTO memberSecurityDTO = (MemberSecurityDTO) authentication.getPrincipal();
+        String encodePW = memberSecurityDTO.getMpw();
 
     }
 }
