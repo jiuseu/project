@@ -31,7 +31,13 @@ public class CustomSocialLoginSuccessHandler implements AuthenticationSuccessHan
 
         if(memberSecurityDTO.isSocial() &&(memberSecurityDTO.getMpw().equals("1111")
         || passwordEncoder.matches("1111", memberSecurityDTO.getMpw()))){
+          log.info("Should Change Password");
 
+          log.info("Redirect to Member Modify ");
+          response.sendRedirect("/member/modify");
+          return;
+        }else{
+            response.sendRedirect("/board/list");
         }
     }
 }
