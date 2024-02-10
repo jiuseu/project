@@ -29,6 +29,8 @@ public class CustomSocialLoginSuccessHandler implements AuthenticationSuccessHan
         MemberSecurityDTO memberSecurityDTO = (MemberSecurityDTO) authentication.getPrincipal();
         String encodePW = memberSecurityDTO.getMpw();
 
+        //소셜 로그인이고 회원의 패스워드가 1111
+
         if(memberSecurityDTO.isSocial() &&(memberSecurityDTO.getMpw().equals("1111")
         || passwordEncoder.matches("1111", memberSecurityDTO.getMpw()))){
           log.info("Should Change Password");
