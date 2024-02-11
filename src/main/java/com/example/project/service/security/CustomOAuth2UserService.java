@@ -78,6 +78,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             member.addRole(MemberRole.USER);
             memberRepository.save(member);
 
+            //MemberSecurityDTO 구성 및 반환
             MemberSecurityDTO memberSecurityDTO = new MemberSecurityDTO(
                     email,"1111",email,false, true, Arrays.asList(
                             new SimpleGrantedAuthority("ROLE_USER")
