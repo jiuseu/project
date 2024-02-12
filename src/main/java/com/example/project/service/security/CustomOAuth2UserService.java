@@ -68,6 +68,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         Optional<Member> result = memberRepository.findByEmail(email);
 
+        //데이터베이스에 해당 이메일을 사용자가 없다면
         if(result.isEmpty()){
             Member member = Member.builder()
                     .mid(email)
