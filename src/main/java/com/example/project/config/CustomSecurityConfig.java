@@ -40,6 +40,7 @@ public class CustomSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
         log.info("-----------------------configure-----------------------");
 
+        //커스텀 로그인 페이지
         http.formLogin(form -> form.loginPage("/member/login"));
         http.csrf(form -> form.disable());
         http.rememberMe(form -> form.key("12345678")
