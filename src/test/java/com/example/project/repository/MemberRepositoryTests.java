@@ -61,7 +61,7 @@ public class MemberRepositoryTests {
     @Test
     public void testUpdate(){
 
-        String mid = "jhjl890@naver.com";
+        String mid = "jhjl890@naver.com"; //소셜 로그인으로 추가된 사용자로 현재 DB에 존재하는 이메일
         String mpw = passwordEncoder.encode("54321");
 
         memberRepository.updatePassword(mpw, mid);
