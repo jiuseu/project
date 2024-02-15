@@ -42,6 +42,7 @@ public class CustomSecurityConfig {
 
         //커스텀 로그인 페이지
         http.formLogin(form -> form.loginPage("/member/login"));
+        //CSRF 토큰 비활성화
         http.csrf(form -> form.disable());
         http.rememberMe(form -> form.key("12345678")
                 .userDetailsService(userDetailsService)
