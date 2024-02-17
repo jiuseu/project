@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Log4j2
 @RequiredArgsConstructor
 public class MemberController {
-
+    //의존성 주입
     private final MemberService memberService;
 
     @GetMapping("/login")
