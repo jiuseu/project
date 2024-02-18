@@ -24,6 +24,7 @@ public class Custom403Handler implements AccessDeniedHandler {
 
         response.setStatus(HttpStatus.FORBIDDEN.value());
 
+        //JSON 요청이었는지 확인
         String contentType = request.getHeader("Content-Type");
 
         if(contentType == null){
