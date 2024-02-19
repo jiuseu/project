@@ -70,6 +70,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         //데이터베이스에 해당 이메일을 사용자가 없다면
         if(result.isEmpty()){
+            //회원 추가 -- mid는 이메일 주소 / 패스워드는 1111
             Member member = Member.builder()
                     .mid(email)
                     .mpw(passwordEncoder.encode("1111"))
