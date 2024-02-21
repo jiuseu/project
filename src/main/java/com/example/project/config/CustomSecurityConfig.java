@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -51,7 +52,7 @@ public class CustomSecurityConfig {
         http.exceptionHandling(form -> form.accessDeniedHandler(accessDeniedHandler()));
         http.oauth2Login(form -> form.loginPage("/member/login")
                 .successHandler(authenticationSuccessHandler()));
-
+        http.sessionManagement(form -> form.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
 
