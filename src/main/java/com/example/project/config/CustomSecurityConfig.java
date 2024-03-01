@@ -51,6 +51,7 @@ public class CustomSecurityConfig {
 
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
 
+        //authenticationManger 필수 설정
         http.authenticationManager(authenticationManager);
 
         //커스텀 로그인 페이지
