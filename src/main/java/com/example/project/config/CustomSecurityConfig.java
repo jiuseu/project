@@ -43,6 +43,7 @@ public class CustomSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
         log.info("-----------------------configure-----------------------");
 
+        //AuthenticationManger 설정
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
 
