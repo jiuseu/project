@@ -50,6 +50,7 @@ public class CustomSecurityConfig {
         authenticationManagerBuilder.userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
 
+        //Get AuthenticationManger
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
 
         //authenticationManger 필수 설정
