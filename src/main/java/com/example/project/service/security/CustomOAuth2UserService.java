@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
+    //주입
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
