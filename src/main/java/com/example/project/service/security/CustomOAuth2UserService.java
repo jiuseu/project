@@ -115,7 +115,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         String email = (String)accountMap.get("email");
 
-        log.info("email..."+ email);
+        log.info("kakao email..."+ email);
 
         return email;
     }
