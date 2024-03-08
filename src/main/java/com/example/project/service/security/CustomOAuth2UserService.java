@@ -60,6 +60,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         paramMap.forEach((k, v) -> {
             log.info("--------------------------------------");
             log.info(k +":" + v);
+            log.info("--------------------------------------");
         });
 
         return generateDTO(email, paramMap);
