@@ -149,7 +149,7 @@ public class BoardController {
     @PreAuthorize("principal.username == #boardDTO.user")
     public ResponseEntity<?> remove(BoardDTO boardDTO,RedirectAttributes redirectAttributes){
 
-        log.info("remove post.. "+boardDTO.getBno());
+        log.info("Remove Post.. "+boardDTO.getBno());
 
         boardService.remove(boardDTO.getBno());
 
