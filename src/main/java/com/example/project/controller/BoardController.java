@@ -102,7 +102,7 @@ public class BoardController {
     @GetMapping("/modify")
     public ModelAndView modifyGet(Long bno,PageRequestDTO pageRequestDTO){
 
-        log.info("board POST Modify....");
+        log.info("board Get Modify....");
 
         BoardDTO boardDTO = boardService.read(bno);
 
