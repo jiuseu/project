@@ -54,6 +54,7 @@ public class BoardController {
     @GetMapping("/register")
     @PreAuthorize("hasRole('USER')")
     public ModelAndView registerGet(){
+        log.info("board GET register....");
         ModelAndView mav = new ModelAndView("/board/register.html");
 
         return mav;
