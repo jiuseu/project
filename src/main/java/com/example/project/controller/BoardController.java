@@ -38,6 +38,8 @@ public class BoardController {
     @GetMapping("/list")
     public ModelAndView list(PageRequestDTO pageRequestDTO){
 
+        log.info("board GET register....");
+
         //PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
         PageResponseDTO<BoardListAllDTO> responseDTO =
                 boardService.listWithAll(pageRequestDTO);
