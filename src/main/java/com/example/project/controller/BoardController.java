@@ -91,6 +91,8 @@ public class BoardController {
     @GetMapping("/read")
     public ModelAndView read(Long bno,PageRequestDTO pageRequestDTO){
 
+        log.info("board Get Read....");
+
         BoardDTO boardDTO = boardService.read(bno);
 
         log.info(boardDTO);
