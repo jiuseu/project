@@ -127,7 +127,7 @@ public class BoardController {
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes){
 
-        log.info("modify POST....");
+        log.info("board modify POST....");
         String link = pageRequestDTO.getLink();
 
         if(bindingResult.hasErrors()){
