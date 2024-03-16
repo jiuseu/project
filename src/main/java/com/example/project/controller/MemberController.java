@@ -41,6 +41,7 @@ public class MemberController {
         log.info(memberJoinDTO);
 
         try{
+            log.info("join try Success");
             memberService.join(memberJoinDTO);
         }catch (MemberService.MidExistException e){
 
