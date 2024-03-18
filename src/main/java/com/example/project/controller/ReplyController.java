@@ -31,6 +31,7 @@ public class ReplyController {
                                                      BindingResult bindingResult)throws BindException{
 
         log.info(replyDTO);
+        log.info("reply register....");
 
         if(bindingResult.hasErrors()){
             throw new BindException(bindingResult);
