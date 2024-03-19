@@ -49,6 +49,7 @@ public class ReplyController {
     public PageResponseDTO<ReplyDTO> getList(@PathVariable("bno") Long bno,
                                              PageRequestDTO pageRequestDTO){
 
+        log.info("reply list get....");
         PageResponseDTO<ReplyDTO> responseDTO = replyService.getListBoard(bno,pageRequestDTO);
 
         return responseDTO;
