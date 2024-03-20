@@ -59,6 +59,7 @@ public class ReplyController {
     @GetMapping("/{rno}")
     public ReplyDTO getReplyDTO(@PathVariable("rno") Long rno){
 
+        log.info("reply rno get....");
         ReplyDTO replyDTO = replyService.read(rno);
 
         return replyDTO;
