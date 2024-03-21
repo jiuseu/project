@@ -69,6 +69,7 @@ public class ReplyController {
     @DeleteMapping("/{rno}")
     public Map<String,Long> remove( @PathVariable("rno") Long rno ){
 
+        log.info("reply delete....");
         replyService.remove(rno);
 
         Map<String, Long> resultMap = new HashMap<>();
