@@ -83,6 +83,7 @@ public class ReplyController {
     @PutMapping(value = "/{rno}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, Long> modify(@PathVariable("rno") Long rno, @RequestBody ReplyDTO replyDTO){
 
+        log.info("reply modify....");
         replyDTO.setRno(rno);
         replyService.modify(replyDTO);
         Map<String, Long> resultMap = new HashMap<>();
