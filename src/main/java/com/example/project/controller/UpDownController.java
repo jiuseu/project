@@ -32,6 +32,7 @@ public class UpDownController {
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public List<UploadResultDTO> upload(@RequestBody UploadFileDTO uploadFileDTO){
 
+        log.info("Upload POST.....");
         log.info(uploadFileDTO);
 
         if(uploadFileDTO.getFiles() != null){
