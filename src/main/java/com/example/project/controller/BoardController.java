@@ -162,6 +162,7 @@ public class BoardController {
         log.info(boardDTO.getFileNames());
         List<String> fileNames = boardDTO.getFileNames();
         if(fileNames != null && fileNames.size() > 0){
+            log.info("================= 게시물 삭제함으로써 해당 첨부파일 삭제 =================");
             removeFiles(fileNames);
         }
         HttpHeaders headers = new HttpHeaders();
