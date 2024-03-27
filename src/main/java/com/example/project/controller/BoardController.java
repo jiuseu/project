@@ -174,6 +174,8 @@ public class BoardController {
 
     public void removeFiles(List<String> files){
 
+        log.info("========= RemoveFiles Methods execution =========");
+
         for(String fileNames:files){
             Resource resource = new FileSystemResource(uploadPath + File.separator + fileNames);
             String resourceName = resource.getFilename();
