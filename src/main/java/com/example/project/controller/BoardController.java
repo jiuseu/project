@@ -186,6 +186,8 @@ public class BoardController {
 
                 //섬네일이 존재한다면
                 if(contentType.startsWith("image")){
+
+                    log.info("========= 섬네일 삭제중 =========");
                     File thumbnailFile = new File(uploadPath + File.separator + "s_"+fileNames);
                     thumbnailFile.delete();
                 }
