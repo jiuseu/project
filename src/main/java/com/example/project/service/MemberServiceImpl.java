@@ -37,6 +37,7 @@ public class MemberServiceImpl implements MemberService{
         log.info("================================");
         log.info(member);
         log.info(member.getRoleSet());
+        log.info("================================");
 
         memberRepository.save(member);
     }
