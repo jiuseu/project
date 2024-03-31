@@ -27,6 +27,8 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public Long register(BoardDTO boardDTO){
 
+        log.info("=================== Board Service registering ===================");
+
         Board board = dtoToEntity(boardDTO);
 
         Long bno = boardRepository.save(board).getBno();
