@@ -37,6 +37,8 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public BoardDTO read(Long bno){
+
+        log.info("=================== Board Service read"+bno+"... ===================");
         Optional<Board> result = boardRepository.findByIdWithImages(bno);
         Board board = result.orElseThrow();
         BoardDTO boardDTO = entityToDTO(board);
