@@ -48,6 +48,8 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public void modify(BoardDTO boardDTO){
+
+        log.info("=================== Board Service modify"+boardDTO.getBno()+"... ===================");
         Optional<Board> result = boardRepository.findById(boardDTO.getBno());
         Board board = result.orElseThrow();
 
