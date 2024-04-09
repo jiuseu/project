@@ -60,6 +60,8 @@ public class ReplyServiceImpl implements ReplyService{
     @Override
     public void modify(ReplyDTO replyDTO){
 
+        log.info("=================== Reply Service modify"+replyDTO.getRno()+"... ===================");
+
         Optional<Reply> result = replyRepository.findById(replyDTO.getRno());
         Reply reply = result.orElseThrow();
 
