@@ -71,6 +71,7 @@ public class ReplyServiceImpl implements ReplyService{
 
     @Override
     public void remove(Long rno){
+        log.info("=================== Reply Service remove"+rno+"... ===================");
         replyRepository.deleteById(rno);;
     }
 
