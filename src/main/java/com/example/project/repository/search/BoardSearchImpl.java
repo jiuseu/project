@@ -11,6 +11,7 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPQLQuery;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +19,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Log4j2
 public class BoardSearchImpl extends Querydsl5RepositorySupport implements BoardSearch {
 
     public BoardSearchImpl(){
@@ -29,6 +30,8 @@ public class BoardSearchImpl extends Querydsl5RepositorySupport implements Board
 
     @Override
     public Page<Board> searchAll(String[] types, String keyword, Pageable pageable){
+
+        log.info("=================== Board SearchAll... ===================");
 
         return applyPagination(pageable, query -> query.selectFrom(board)
                         .where(TitleSearch(types,keyword),
