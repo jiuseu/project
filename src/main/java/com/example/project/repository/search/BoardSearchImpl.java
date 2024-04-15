@@ -44,7 +44,7 @@ public class BoardSearchImpl extends Querydsl5RepositorySupport implements Board
     @Override
     public Page<BoardListReplyCountDTO> searchWithReplyCount(String[] types,String keyword,Pageable pageable){
 
-        log.info("=================== Board Search With Reply Count... ===================");
+        log.info("=================== Board Search With Reply Count..... ===================");
 
         return applyPagination(pageable, query -> query.select(Projections.bean(
                                 BoardListReplyCountDTO.class,
