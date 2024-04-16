@@ -65,6 +65,8 @@ public class BoardSearchImpl extends Querydsl5RepositorySupport implements Board
     @Override
     public Page<BoardListAllDTO> searchWithAll(String[] types, String keyword, Pageable pageable){
 
+        log.info("=================== Board Search With All..... ===================");
+
         JPQLQuery<Board> result = JPQLPagination(pageable, query -> query.select(Projections.bean(
                         BoardListReplyCountDTO.class,
                         board.bno,
