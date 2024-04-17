@@ -114,6 +114,8 @@ public class BoardSearchImpl extends Querydsl5RepositorySupport implements Board
     }
 
     private BooleanExpression TitleSearch(String[] types, String keyword){
+
+        log.info("=================== Private Title Search Method running..... ===================");
         if(types == null){
             return null;
         }
