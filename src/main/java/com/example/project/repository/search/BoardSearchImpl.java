@@ -125,6 +125,8 @@ public class BoardSearchImpl extends Querydsl5RepositorySupport implements Board
     }
 
     private BooleanExpression ContentSearch(String[] types, String keyword){
+
+        log.info("=================== Private Content Search Method running..... ===================");
         if(types == null){
             return null;
         }
