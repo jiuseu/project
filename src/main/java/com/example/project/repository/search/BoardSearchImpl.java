@@ -136,6 +136,8 @@ public class BoardSearchImpl extends Querydsl5RepositorySupport implements Board
     }
 
     private BooleanExpression UserSearch(String[] types, String keyword){
+
+        log.info("=================== Private User Search Method running..... ===================");
         if(types == null){
             return null;
         }
