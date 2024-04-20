@@ -102,6 +102,7 @@ public class UpDownController {
         boolean removed = false;
 
         try{
+            log.info("=================== removeFile Success!! ===================");
             String contentType = Files.probeContentType(resource.getFile().toPath());
             removed = resource.getFile().delete();
 
