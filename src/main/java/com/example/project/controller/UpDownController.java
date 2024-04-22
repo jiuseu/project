@@ -54,6 +54,7 @@ public class UpDownController {
                     //이미지 파일의 종류라면
                     if(Files.probeContentType(savePath).startsWith("image")){
 
+                        log.info("Upload POST Image File.....");
                         image = true;
                         File thumbFile = new File(uploadPath, "s_" + uuid+"_"+originalName);
                         Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 200, 200);
