@@ -60,6 +60,7 @@ public class UpDownController {
                         Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 200, 200);
                     }
                 }catch (IOException e){
+                    log.info("Upload POST Image File Error Fail.....");
                     e.printStackTrace();
                 }
 
