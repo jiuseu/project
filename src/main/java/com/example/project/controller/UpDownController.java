@@ -54,13 +54,13 @@ public class UpDownController {
                     //이미지 파일의 종류라면
                     if(Files.probeContentType(savePath).startsWith("image")){
 
-                        log.info("=================== Upload POST Image File.... ===================");
+                        log.info("=================== Upload POST Image File..... ===================");
                         image = true;
                         File thumbFile = new File(uploadPath, "s_" + uuid+"_"+originalName);
                         Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 200, 200);
                     }
                 }catch (IOException e){
-                    log.info("=================== Upload POST Image File Error Fail.... ===================");
+                    log.info("=================== Upload POST Image File Error Fail..... ===================");
                     e.printStackTrace();
                 }
 
@@ -104,12 +104,12 @@ public class UpDownController {
         boolean removed = false;
 
         try{
-            log.info("=================== removeFile process Success!! ===================");
+            log.info("=================== removeFile process Success!!! ===================");
             String contentType = Files.probeContentType(resource.getFile().toPath());
             removed = resource.getFile().delete();
 
             if(contentType.startsWith("image")){
-                log.info("=================== File Image is  Deleting... ===================");
+                log.info("=================== File Image is  Deleting..... ===================");
               File thumbnailFile = new File(uploadPath+File.separator + "s_" + fileName);
               thumbnailFile.delete();
             }
