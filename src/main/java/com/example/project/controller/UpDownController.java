@@ -109,7 +109,7 @@ public class UpDownController {
             removed = resource.getFile().delete();
 
             if(contentType.startsWith("image")){
-                log.info("=================== File Image is  Deleting..... ===================");
+                log.info("=================== File Image is Deleting..... ===================");
               File thumbnailFile = new File(uploadPath+File.separator + "s_" + fileName);
               thumbnailFile.delete();
             }
