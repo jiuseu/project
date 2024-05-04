@@ -27,7 +27,7 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public Long register(BoardDTO boardDTO){
 
-        log.info("=================== Board Service registering... ===================");
+        log.info("=================== Board Service Registering... ===================");
 
         Board board = dtoToEntity(boardDTO);
 
@@ -38,7 +38,7 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public BoardDTO read(Long bno){
 
-        log.info("=================== Board Service read"+bno+"... ===================");
+        log.info("=================== Board Service Read"+bno+"... ===================");
         Optional<Board> result = boardRepository.findByIdWithImages(bno);
         Board board = result.orElseThrow();
         BoardDTO boardDTO = entityToDTO(board);
@@ -49,7 +49,7 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public void modify(BoardDTO boardDTO){
 
-        log.info("=================== Board Service modify"+boardDTO.getBno()+"... ===================");
+        log.info("=================== Board Service Modify"+boardDTO.getBno()+"... ===================");
         Optional<Board> result = boardRepository.findById(boardDTO.getBno());
         Board board = result.orElseThrow();
 
@@ -60,7 +60,7 @@ public class BoardServiceImpl implements BoardService{
 
         if(boardDTO.getFileNames() != null){
 
-            log.info("=================== getFileNames not Null... ===================");
+            log.info("=================== getFileNames Not Null... ===================");
             for(String fileName : boardDTO.getFileNames()){
                 String[] arr = fileName.split("_");
                 board.addImage(arr[0],arr[1]);
@@ -71,7 +71,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public void remove(Long bno){
-        log.info("=================== Board Service remove"+bno+"... ===================");
+        log.info("=================== Board Service Remove"+bno+"... ===================");
         boardRepository.deleteById(bno);
     }
 
