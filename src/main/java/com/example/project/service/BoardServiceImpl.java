@@ -60,7 +60,7 @@ public class BoardServiceImpl implements BoardService{
 
         if(boardDTO.getFileNames() != null){
 
-            log.info("=================== getFileNames Not Null... ===================");
+            log.info("=================== GetFileNames Not Null... ===================");
             for(String fileName : boardDTO.getFileNames()){
                 String[] arr = fileName.split("_");
                 board.addImage(arr[0],arr[1]);
