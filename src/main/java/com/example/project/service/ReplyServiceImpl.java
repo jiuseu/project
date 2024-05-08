@@ -43,7 +43,7 @@ public class ReplyServiceImpl implements ReplyService{
     @Override
     public ReplyDTO read(Long rno){
 
-        log.info("=================== Reply Service read"+rno+"... ===================");
+        log.info("=================== Reply Service Read"+rno+"... ===================");
 
         modelMapper.typeMap(Reply.class, ReplyDTO.class).addMapping(
                 src -> src.getBoard().getBno(), (dest, v) -> dest.setBno((Long)v)
