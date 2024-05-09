@@ -29,7 +29,7 @@ public class ReplyServiceImpl implements ReplyService{
     @Override
     public Long register(ReplyDTO replyDTO){
 
-        log.info("=================== Reply Service register"+replyDTO.getRno()+"... ===================");
+        log.info("=================== Reply Service Register"+replyDTO.getRno()+"... ===================");
         modelMapper.typeMap(ReplyDTO.class, Reply.class).addMapping(
                 src -> src.getBno(), (dest, v) -> dest.getBoard().setBno((Long) v)
         );
