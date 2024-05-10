@@ -60,7 +60,7 @@ public class ReplyServiceImpl implements ReplyService{
     @Override
     public void modify(ReplyDTO replyDTO){
 
-        log.info("=================== Reply Service Modify"+replyDTO.getRno()+"... ===================");
+        log.info("=================== Reply Service Modify"+replyDTO.getRno()+".... ===================");
 
         Optional<Reply> result = replyRepository.findById(replyDTO.getRno());
         Reply reply = result.orElseThrow();
@@ -71,14 +71,14 @@ public class ReplyServiceImpl implements ReplyService{
 
     @Override
     public void remove(Long rno){
-        log.info("=================== Reply Service Remove"+rno+"... ===================");
+        log.info("=================== Reply Service Remove"+rno+".... ===================");
         replyRepository.deleteById(rno);;
     }
 
     @Override
     public PageResponseDTO<ReplyDTO> getListBoard(Long bno, PageRequestDTO pageRequestDTO){
 
-        log.info("=================== Reply Service getListBoard"+bno+"... ===================");
+        log.info("=================== Reply Service getListBoard"+bno+".... ===================");
 
         Pageable pageable = PageRequest.of(pageRequestDTO.getPage() <= 0 ? 0:
                 pageRequestDTO.getPage() - 1, pageRequestDTO.getSize(),
