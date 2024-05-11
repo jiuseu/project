@@ -78,7 +78,7 @@ public class ReplyServiceImpl implements ReplyService{
     @Override
     public PageResponseDTO<ReplyDTO> getListBoard(Long bno, PageRequestDTO pageRequestDTO){
 
-        log.info("=================== Reply Service getListBoard"+bno+".... ===================");
+        log.info("=================== Reply Service GetListBoard"+bno+".... ===================");
 
         Pageable pageable = PageRequest.of(pageRequestDTO.getPage() <= 0 ? 0:
                 pageRequestDTO.getPage() - 1, pageRequestDTO.getSize(),
