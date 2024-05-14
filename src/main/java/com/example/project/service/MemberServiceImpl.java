@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public void join(MemberJoinDTO memberJoinDTO)throws MidExistException{
 
-        log.info("Member Join....");
+        log.info("================ Member Join.... ================");
 
         String mid = memberJoinDTO.getMid();
         boolean exist = memberRepository.existsById(mid);
