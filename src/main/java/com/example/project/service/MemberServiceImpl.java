@@ -27,7 +27,7 @@ public class MemberServiceImpl implements MemberService{
         boolean exist = memberRepository.existsById(mid);
 
         if(exist){
-            log.info("==================== 입력한 아이디가 이미 존재합니다. ====================");
+            log.info("===================== 입력한 아이디가 이미 존재합니다. =====================");
             throw new MidExistException();
         }
 
