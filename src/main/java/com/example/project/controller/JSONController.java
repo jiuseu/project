@@ -11,7 +11,7 @@ public class JSONController {
     @GetMapping("/helloArr")
     public String[] helloArr(){
 
-        log.info("Hello Arr.......................");
+        log.info("Hello Arr......................");
         return new String[]{"AAA","BBB","CCC","FX-570CW"};
     }
 }
