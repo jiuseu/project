@@ -12,6 +12,6 @@ public class JSONController {
     public String[] helloArr(){
 
         log.info("Hello Arr..............................");
-        return new String[]{"AAA","BBB","CCC","이지베이션 BS미니2","모토벨로 tx7","AU테크 스카닉 AMI"};
+        return new String[]{"AAA","BBB","CCC","이지베이션 BS미니2","삼천리 팬텀 s1","삼천리 어라운드"};
     }
 }
