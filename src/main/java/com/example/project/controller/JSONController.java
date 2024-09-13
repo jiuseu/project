@@ -12,6 +12,6 @@ public class JSONController {
     public String[] helloArr(){
 
         log.info("Hello Arr..........................");
-        return new String[]{"첫째날 : 87.2케이지","BBB","CCC","DDD"};
+        return new String[]{"첫째날 : 87.2케이지","둘째날 : 87.6케이지","CCC","DDD"};
     }
 }
