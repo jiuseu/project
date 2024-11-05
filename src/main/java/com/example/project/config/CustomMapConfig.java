@@ -14,7 +14,7 @@ public interface CustomMapConfig {
     @Mapping(target = "imageSet", ignore = true)
     Board toBoardEntity(BoardDTO boardDTO);
 
-    @Mapping(target = "fileNames", expression = "java(new BoardDTO.getMapperFileName(board.getImageSet()))")
+    @Mapping(target = "fileNames", expression = "java(new BoardDTO().getMapperFileName(board.getImageSet()))")
     BoardDTO toBoardDTO(Board board);
 
     @Mapping(target = "board.bno", source = "bno")
